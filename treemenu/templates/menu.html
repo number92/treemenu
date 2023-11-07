@@ -1,0 +1,15 @@
+<ul class="topmenu">
+    <li><a class="active" 
+        href="{% url "home" %}">{{ result.topmenu }}</a><span class="fa fa-angle-down"></span></a>
+<ul class="submenu">
+    {% for i in result.data %}
+        {% if i %}<li><a class="{% if request.path|cut:"/" == i.item.path %}nav-link{% else %}nav-link-activ{% endif %}"
+                   href="{% url "sub" i.item.path %}">{{ i.item.name }}</a>{% endif %}
+                {% if i.subitems %}<ul class="submenu">
+                    {% for subuitem in i.subitems %}
+                        <li><a class="{% if request.path == subuitem.path %}nav-link{% else %}nav-link-activ{% endif %}"
+                            href="{{ subuitem.get_absolute_url }}">{{ subuitem.name }}</a></li>
+                    {% endfor %}</ul>{% endif %}
+            </li>
+        {% endfor %}
+</ul>

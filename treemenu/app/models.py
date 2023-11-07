@@ -1,26 +1,43 @@
 from django.db import models
 
 
-class CategoryMenu(models.Model):
-    name = models.CharField('Имя', max_length=255)
+class GeneralFieldMenu(models.Model):
+    name = models.CharField('Имя', max_length=255, unique=True)
+    path = models.SlugField(
+        'Элемент пути',
+        max_length=500,
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        abstract = True
+
+    def get_absolute_url(self):
+        return "/%s" % self.path
+
+    def __str__(self):
+        return self.name
+
+
+class CategoryMenu(GeneralFieldMenu, models.Model,):
 
     class Meta:
         verbose_name = 'Menu category'
         verbose_name_plural = 'Menu categories'
 
     def __str__(self):
-        return self.verbose_name
+        return self.name
 
 
-class TreeMenu(models.Model):
-    name = models.CharField('Имя', max_length=255)
+class SubMenu(GeneralFieldMenu, models.Model):
+    name = models.CharField('Имя', max_length=255, unique=True)
     category = models.ForeignKey(
         CategoryMenu,
         on_delete=models.CASCADE,
         blank=False,
         null=False
     )
-    path = models.CharField(max_length=500, blank=True, null=True, unique=True)
     parent = models.ForeignKey(
         'self',
         on_delete=models.SET_DEFAULT,
@@ -30,8 +47,5 @@ class TreeMenu(models.Model):
     )
 
     class Meta:
-        verbose_name = 'Menu item'
-        verbose_name_plural = 'Menu items'
-
-    def __str__(self):
-        return self.name
+        verbose_name = 'submenu'
+        verbose_name_plural = 'submenu items'
