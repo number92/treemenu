@@ -31,7 +31,7 @@ nav a {
   font-size: 12px;
   text-transform: uppercase;
   color: #FEFDFD;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
 }
 .topmenu > li > a.active,
 .submenu a:hover {color: #ddbe86;}
@@ -43,7 +43,7 @@ nav a {
 .submenu {
   position: absolute;
   z-index: 5;
-  min-width: 200px;
+  min-width: 150px;
   background: white;
   border-top: 1px solid #CBCBCC;
   border-left: 1px solid #CBCBCC;
@@ -60,14 +60,12 @@ nav a {
   padding: 10px 20px;
   font-size: 13px;
   border-bottom: 1px solid #CBCBCC;
-  display: block;
 }
 .submenu .submenu {
   position: absolute;
   left: 100%;
   top: -1px;
   transition: .3s linear;
-  display: block;
 }
 nav li:hover > .submenu {
   transform: rotateX(0deg);
