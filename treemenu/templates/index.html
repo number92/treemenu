@@ -1,0 +1,17 @@
+{% load menu_tags %}
+<!doctype html>
+<html lang="ru">
+{% load static %}
+  <head>
+    <meta charset="utf-8">
+<link href="{% static "css/main.css" %}" rel="stylesheet">
+      <title>The main page</title>
+  </head>
+  <body>
+    <nav>
+      {% draw_menu "Menu 1" %} 
+      {% draw_menu "Menu 2" %}
+      {% draw_menu "Menu 3" %}
+    </nav>
+   </body>
+</html> 
